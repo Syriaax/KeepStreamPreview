@@ -1,44 +1,44 @@
 # KeepStreamPreview
 
-Vencord-Plugin. Discord pausiert die Vorschau deines eigenen Streams, sobald das Discord-Fenster nicht mehr im Fokus ist
-("Your stream is still running! We've paused this preview to save your resources."). Dieses Plugin verhindert das.
+Vencord plugin. Discord pauses the preview of your own stream as soon as the Discord window loses focus
+("Your stream is still running! We've paused this preview to save your resources."). This plugin stops that.
 
-## Was Discord intern macht (Stand Discord-Build Nov 2026)
+## What Discord does internally (Discord build, Nov 2026)
 
-| Stelle | Bedingung für Pause | Nativ abschaltbar? |
+| Place | Pauses when | Can be disabled natively? |
 |---|---|---|
-| Stream-Kachel im Call | eigener Stream + Einstellung `pauseSelfStreamPreviewWhenUnfocused` (Standard: an) + Fenster nicht fokussiert + kein Popout | Ja: Rechtsklick auf eigenen Stream → Haken bei **"Pause Preview When Discord Isn't Focused"** entfernen |
-| Bild-in-Bild-Player (wenn du im Call bist, aber einen Textkanal offen hast) | eigener Stream + Fenster nicht fokussiert | **Nein**, ignoriert die Einstellung |
-| Popout-Fenster | wird nie pausiert | – |
+| Stream tile in the call view | own stream + setting `pauseSelfStreamPreviewWhenUnfocused` (default: on) + window not focused + no popout | Yes: right-click your stream → uncheck **"Pause Preview When Discord Isn't Focused"** |
+| Picture-in-picture player (in a call, but viewing a text channel) | own stream + window not focused | **No**, ignores the setting |
+| Popout window | never paused | – |
 
-Ohne Plugin: Haken im Rechtsklick-Menü entfernen oder Stream per Popout-Button in eigenes Fenster legen.
-Mit Plugin: beide Stellen bleiben immer live.
+Without the plugin: uncheck the option in the right-click menu, or move the stream into its own window with the popout button.
+With the plugin: both places always stay live.
 
-## Einstellungen
+## Settings
 
-- `callTile`: Kachel im Call-Fenster live halten (Standard: an)
-- `pictureInPicture`: Bild-in-Bild-Player live halten (Standard: an)
+- `callTile`: keep the call view tile live (default: on)
+- `pictureInPicture`: keep the picture-in-picture player live (default: on)
 
 ## Installation
 
-Eigene Plugins gehen nur mit Vencord aus dem Quellcode. Voraussetzung: Git und Node.js 22+.
+Custom plugins only work with Vencord built from source. Requirements: Git and Node.js 22+.
 
-Automatisch (klont Vencord nach `%USERPROFILE%\Vencord`, baut und injiziert):
+Automatic (clones Vencord to `%USERPROFILE%\Vencord`, builds and injects it):
 
 ```powershell
 git clone https://github.com/Syriaax/KeepStreamPreview.git
 powershell -ExecutionPolicy Bypass -File KeepStreamPreview\install.ps1
 ```
 
-Manuell:
+Manual:
 
 1. `git clone https://github.com/Vendicated/Vencord.git`
-2. `cd Vencord\src\userplugins` und `git clone https://github.com/Syriaax/KeepStreamPreview.git keepStreamPreview`
-3. Zurück im Vencord-Ordner: `npm i -g pnpm`, `pnpm install --frozen-lockfile`, `pnpm build`, `pnpm inject`
-4. Discord komplett neu starten, unter Einstellungen → Vencord → Plugins **KeepStreamPreview** aktivieren, nochmal neu starten
+2. `cd Vencord\src\userplugins` and `git clone https://github.com/Syriaax/KeepStreamPreview.git keepStreamPreview`
+3. Back in the Vencord folder: `npm i -g pnpm`, `pnpm install --frozen-lockfile`, `pnpm build`, `pnpm inject`
+4. Fully restart Discord, enable **KeepStreamPreview** under Settings → Vencord → Plugins, restart again
 
-Update: im Plugin-Ordner `git pull`, im Vencord-Ordner `pnpm build`, Discord neu laden (Strg+R).
+Update: run `git pull` in the plugin folder, `pnpm build` in the Vencord folder, then reload Discord (Ctrl+R).
 
-## Hinweis
+## Note
 
-Dauerhaft laufende Vorschau kostet etwas CPU/GPU. Das ist der Grund, warum Discord sie pausiert.
+A preview that never pauses uses some extra CPU/GPU. That is why Discord pauses it.
