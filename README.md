@@ -21,14 +21,20 @@ With the plugin: both places always stay live.
 
 ## Installation
 
-Custom plugins only work with Vencord built from source. Requirements: Git and Node.js 22+.
+Custom plugins only work with Vencord built from source. The install script does all of it for you.
+The only requirement is Discord (Stable) installed on Windows.
 
-Automatic (clones Vencord to `%USERPROFILE%\Vencord`, builds and injects it):
+1. Click **Code → Download ZIP** on this page and extract it
+2. Double-click **`install.cmd`** in the extracted folder
 
-```powershell
-git clone https://github.com/Syriaax/KeepStreamPreview.git
-powershell -ExecutionPolicy Bypass -File KeepStreamPreview\install.ps1
-```
+The script:
+
+- installs Git and Node.js with `winget` if they are missing (Windows may ask for admin rights)
+- clones Vencord to `%USERPROFILE%\Vencord`, or updates it if it is already there
+- copies the plugin into Vencord, installs dependencies and builds it
+- closes Discord, injects Vencord into Discord Stable, enables KeepStreamPreview and starts Discord again
+
+To update, download the ZIP again and run `install.cmd` again.
 
 Manual:
 
