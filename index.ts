@@ -32,8 +32,8 @@ export default definePlugin({
         {
             find: "Stream Tile State - activeStream:",
             replacement: {
-                match: /(?=\i&&\i&&!\i&&\i===\i\.\i\.NO_POPOUT)/,
-                replace: "!$self.settings.store.callTile&&"
+                match: /pauseSelfStreamPreviewWhenUnfocused\).{0,80}?\.NO_POPOUT/,
+                replace: "$&&&!$self.settings.store.callTile"
             }
         },
         // Picture-in-picture player. Pauses your own stream whenever the main window is not focused
